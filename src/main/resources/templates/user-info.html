@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Update User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+<div class="container my-5">
+    <h2 class="mb-5">User Info</h2>
+    <p class="my-5"><a href="/all" class="btn btn-primary">Все пользователи</a></p>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div th:object="${user}">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="name" class="col-form-label">Имя</label>
+                        <span type="text" th:text="*{name}" class="form-control" id="name" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="surname" class="col-form-label">Фамилия</label>
+                        <span type="text" th:text="*{surname}" class="form-control" id="surname" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="age" class="col-form-label">Возраст</label>
+                        <span type="text" th:text="*{age}" class="form-control" id="age" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="sex" class="col-form-label">Пол</label>
+                        <span type="text" th:text="*{sex}" class="form-control" id="sex" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="hobby" class="col-form-label">Интересы</label>
+                        <span type="text" th:text="*{hobby}" class="form-control" id="hobby" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="city" class="col-form-label">Город</label>
+                        <span type="text" th:text="*{city}" class="form-control" id="city" />
+                    </div>
+                </div>
+                <div th:switch="*{friends}" class="container my-5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2 th:case="null">Нет друзей!</h2>
+                            <div th:case="*">
+                                <h2 class="my-5">Друзья</h2>
+                                <table class="table table-striped table-responsive-md">
+                                    <thead>
+                                    <tr>
+                                        <th>Имя</th>
+                                        <th>Фамилия</th>
+                                        <th>Перейти</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="user : *{friends}">
+                                        <td th:text="${user.name}"></td>
+                                        <td th:text="${user.surname}"></td>
+                                        <td><a th:href="@{/{id}(id=${user.id})}" class="btn btn-primary">Перейти</i></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

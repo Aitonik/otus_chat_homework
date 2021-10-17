@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="version_0.1_1_CREATE_PROFILE_TABLE.xml" author="aita">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="profile"/></not>
+        </preConditions>
+        <createTable tableName="profile">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name"  type="varchar(1000)" />
+            <column name="surname"  type="varchar(1000)" />
+            <column name="email"  type="varchar(1000)" />
+            <column name="password"  type="varchar(1000)" />
+            <column name="age"  type="varchar(1000)" />
+            <column name="sex"  type="varchar(1000)" />
+            <column name="hobby"  type="varchar(1000)" />
+            <column name="city"  type="varchar(1000)" />
+            <column name="creation_time" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="profile"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
